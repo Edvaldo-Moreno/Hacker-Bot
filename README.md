@@ -1,0 +1,1 @@
+pkg install git python -y && git clone https://github.com/Edvaldo-Moreno/Hacker-Bot && cd Hacker-Bot && chmod +x hacker_bot.py && echo -e '#!/data/data/com.termux/files/usr/bin/bash\ncd $HOME/Hacker-Bot\npython hacker_bot.py' > $PREFIX/bin/hackerbot && chmod +x $PREFIX/bin/hackerbot && hackerbot
