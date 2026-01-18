@@ -1,0 +1,16 @@
+
+# HACKER BOT – HTTP Injector Config
+# Generated automatically
+
+IP       : 172.67.128.66
+PORT     : 8080
+METHOD   : HTTP / WebSocket
+SNI/HOST : www.signup.ao
+
+PAYLOAD:
+GET / HTTP/1.1
+Host: www.signup.ao
+Upgrade: websocket
+Connection: Upgrade
+
+

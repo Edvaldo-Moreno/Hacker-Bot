@@ -1,0 +1,16 @@
+
+# HACKER BOT – HTTP Injector Config
+# Generated automatically
+
+IP       : 41.78.18.49
+PORT     : 80
+METHOD   : HTTP / WebSocket
+SNI/HOST : unitel.ao
+
+PAYLOAD:
+GET / HTTP/1.1
+Host: unitel.ao
+Upgrade: websocket
+Connection: Upgrade
+
+

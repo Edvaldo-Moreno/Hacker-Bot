@@ -1,0 +1,16 @@
+
+# HACKER BOT – HTTP Injector Config
+# Generated automatically
+
+IP       : 41.78.18.49
+PORT     : 80
+METHOD   : HTTP
+SNI/HOST : 41.78.18.49
+
+PAYLOAD:
+GET / HTTP/1.1
+Host: 41.78.18.49
+Upgrade: websocket
+Connection: Upgrade
+
+

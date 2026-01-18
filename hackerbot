@@ -1,0 +1,62 @@
+import os
+import time
+
+def clear():
+    os.system("clear")
+
+def banner():
+    clear()
+    os.system("toilet -f big -F green HACKER")
+    os.system("toilet -f big -F cyan BOT")
+    print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+    print("🤖 HACKER BOT | TERMINAL SYSTEM")
+    print("👨‍💻 Criador : Edvaldo Moreno")
+    print("📞 Contato : 958747761")
+    print("⚡ Status  : ONLINE")
+    print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+
+def menu():
+    print("""
+[01] 🔎 Scanner SNI / Host
+[02] 🌐 DNS Finder
+[03] 🔗 Gerador de Payload
+[04] 📡 Scan Proxy
+[05] 🧠 Extractor
+[06] 📊 IP Range / CIDR
+[07] 🧪 Bug Scanner
+[00] ❌ Sair
+""")
+
+while True:
+    banner()
+    menu()
+    op = input("➜ Escolha uma opção: ")
+
+    if op == "1":
+        print("Scanner SNI em desenvolvimento...")
+        input("Pressione ENTER para voltar")
+    elif op == "2":
+        print("DNS Finder em desenvolvimento...")
+        input("Pressione ENTER para voltar")
+    elif op == "3":
+        print("Gerador de Payload em desenvolvimento...")
+        input("Pressione ENTER para voltar")
+    elif op == "4":
+        print("Scan Proxy em desenvolvimento...")
+        input("Pressione ENTER para voltar")
+    elif op == "5":
+        print("Extractor em desenvolvimento...")
+        input("Pressione ENTER para voltar")
+    elif op == "6":
+        print("IP Range / CIDR em desenvolvimento...")
+        input("Pressione ENTER para voltar")
+    elif op == "7":
+        print("Bug Scanner em desenvolvimento...")
+        input("Pressione ENTER para voltar")
+    elif op == "0":
+        print("Saindo...")
+        time.sleep(1)
+        break
+    else:
+        print("Opção inválida!")
+        time.sleep(1)

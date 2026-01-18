@@ -1,0 +1,184 @@
+import os, sys, time, ssl, socket, random, ipaddress, threading
+
+# CORES
+G="\033[1;32m"; R="\033[1;31m"; C="\033[1;36m"
+Y="\033[1;33m"; W="\033[1;37m"; X="\033[0m"
+
+def clear():
+    os.system("clear")
+
+def slow(text, d=0.015):
+    for c in text:
+        sys.stdout.write(c)
+        sys.stdout.flush()
+        time.sleep(d)
+    print()
+
+# ⚡ ANIMAÇÃO PESADA DE ENTRADA
+def thunder():
+    frames = [
+        R+"⚡⚡⚡ SYSTEM OVERRIDE ⚡⚡⚡"+X,
+        Y+"████ SYSTEM BREACH ████"+X,
+        C+"///// LOADING DARK CORE /////"+X,
+        R+"☠ ☠ ☠ ACCESSING CORE ☠ ☠ ☠"+X
+    ]
+    for _ in range(8):
+        clear()
+        print(random.choice(frames))
+        time.sleep(0.12)
+
+def banner():
+    clear()
+    thunder()
+    print(R+"""
+██╗  ██╗ █████╗  ██████╗██╗  ██╗███████╗██████╗ 
+██║  ██║██╔══██╗██╔════╝██║ ██╔╝██╔════╝██╔══██╗
+███████║███████║██║     █████╔╝ █████╗  ██████╔╝
+██╔══██║██╔══██║██║     ██╔═██╗ ██╔══╝  ██╔══██╗
+██║  ██║██║  ██║╚██████╗██║  ██╗███████╗██║  ██║
+╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
+"""+X)
+    slow(C+"⚡ HACKER BOT ONLINE")
+    slow("👨‍💻 CRIADOR: EDVALDO MORENO")
+    slow("📞 CONTATO: 958747761")
+    print(W+"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"+X)
+
+def menu():
+    print(C+"[1] 🔎 Scanner SNI / TLS"+X)
+    print(C+"[2] 🌐 DNS / SNI Finder"+X)
+    print(C+"[3] 📡 Gerador Payload WS"+X)
+    print(C+"[4] 💣 Scanner IP Range (CIDR)"+X)
+    print(R+"[5] 😈 MODO HACKER (RESTRITO)"+X)
+    print(Y+"[0] Sair"+X)
+    print(W+"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"+X)
+
+# ========== OPÇÃO 1 ==========
+def scanner_sni():
+    clear()
+    host=input("Host/SNI: ")
+    try:
+        ctx=ssl.create_default_context()
+        s=ctx.wrap_socket(socket.create_connection((host,443),5),server_hostname=host)
+        print(G+"\n[✔] SNI FUNCIONANDO")
+        print(C+"TLS:",s.version())
+        s.close()
+    except Exception as e:
+        print(R+"\n[✖] ERRO:",e)
+    input("\nENTER...")
+
+# ========== OPÇÃO 2 ==========
+def dns_finder():
+    clear()
+    target=input("Domínio ou IP: ")
+    try:
+        ips=socket.gethostbyname_ex(target)[2]
+        print(G+"\nIPs encontrados:")
+        for ip in ips:
+            print(C+" -",ip)
+    except:
+        print(R+"Erro DNS")
+
+    try:
+        ctx=ssl.create_default_context()
+        s=ctx.wrap_socket(socket.create_connection((target,443),5),server_hostname=target)
+        cert=s.getpeercert()
+        print(Y+"\nSNIs (SAN):")
+        for t,n in cert.get("subjectAltName",[]):
+            if t=="DNS":
+                print(" -",n)
+        s.close()
+    except:
+        print(R+"Sem TLS/SNI")
+    input("\nENTER...")
+
+# ========== OPÇÃO 3 ==========
+def payload_gen():
+    clear()
+    host=input("Host/SNI: ")
+    print(G+"\nPAYLOAD WEBSOCKET:\n"+X)
+    print(f"GET / HTTP/1.1\nHost: {host}\nUpgrade: websocket\nConnection: Upgrade\n\n")
+    input("ENTER...")
+
+# ========== OPÇÃO 4 ==========
+def scan_ip(ip):
+    try:
+        s=ssl.create_default_context().wrap_socket(
+            socket.create_connection((str(ip),443),2),
+            server_hostname=str(ip)
+        )
+        print(G+"[LIVE]",ip)
+        s.close()
+    except:
+        pass
+
+def cidr_scan():
+    clear()
+    cidr=input("CIDR (ex: 104.16.0.0/24): ")
+    try:
+        net=ipaddress.ip_network(cidr, strict=False)
+        print(Y+"\nScanning",net.num_addresses,"IPs...\n"+X)
+        threads=[]
+        for ip in net:
+            t=threading.Thread(target=scan_ip,args=(ip,))
+            t.start()
+            threads.append(t)
+        for t in threads:
+            t.join()
+    except Exception as e:
+        print(R+"Erro:",e)
+    input("\nENTER...")
+
+# ========== MODO HACKER ==========
+def scary_processing():
+    start=time.time()
+    skulls=["☠","☠☠","☠☠☠","☠☠☠☠"]
+    while time.time()-start < 10:
+        sys.stdout.write(
+            "\r"+R+"PROCESSANDO "+random.choice(skulls)+
+            " ███▒▒▒▒▒▒▒▒ SYSTEM OVERLOAD"+X
+        )
+        sys.stdout.flush()
+        time.sleep(0.25)
+    print("\n"+G+"✔ CORE DESBLOQUEADO"+X)
+
+def hacker_mode():
+    clear()
+    slow(R+"⚠ ACESSO RESTRITO ⚠")
+    senha=input(Y+"Senha: "+X)
+
+    if senha!="BERYON":
+        slow(R+"✖ ACESSO NEGADO")
+        time.sleep(2)
+        return
+
+    slow(G+"✔ ACESSO AUTORIZADO")
+    slow(C+"ENTRANDO NO MODO HACKER...")
+    scary_processing()
+
+    clear()
+    print(R+"😈🔥 MODO HACKER ATIVO 🔥😈"+X)
+    print(W+"━━━━━━━━━━━━━━━━━━━━━━━━━━━━"+X)
+    print(C+"[A] Dark OverScan (TESTE)"+X)
+    print(C+"[B] Ghost TLS Engine"+X)
+    print(C+"[C] Phantom DNS"+X)
+    print(W+"━━━━━━━━━━━━━━━━━━━━━━━━━━━━"+X)
+    slow(Y+"⚠ Funções exclusivas em desenvolvimento ⚠")
+    input("\nENTER para sair")
+
+# ========== LOOP ==========
+while True:
+    banner()
+    menu()
+    op=input("➜ ")
+
+    if op=="1": scanner_sni()
+    elif op=="2": dns_finder()
+    elif op=="3": payload_gen()
+    elif op=="4": cidr_scan()
+    elif op=="5": hacker_mode()
+    elif op=="0":
+        slow(R+"Encerrando sistema...")
+        break
+    else:
+        slow(Y+"Opção inválida")
+        time.sleep(1)
